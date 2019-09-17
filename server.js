@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3000; //(env file: PORT=3000)
 //   "longitude": "-122.332071"
 // }
 
-app.get('/locations', request, response => {
+app.get('/locations', (request, response) => {
   //  get info from json data
   // JSON data will be sent through constructor to create a lng lat format that is usable in order to create client side objects
   try {
@@ -30,12 +30,10 @@ app.get('/locations', request, response => {
   } catch (err) {
     console.error(err);
   }
-
-  response.status(200).sent(results);
 })
 
-function Location(searchQuery, geoDataResults) {
-  this.searchQuery = searchQuery;
+function Location(search_query, geoDataResults) {
+  this.search_query = search_query;
   this.formatted_query = geoDataResults.results[0].formatted_address;
   this.latitude = geoDataResults.results[0].geometry.location.lat;
   this.longitude = geoDataResults.results[0].geometry.location.lng;
